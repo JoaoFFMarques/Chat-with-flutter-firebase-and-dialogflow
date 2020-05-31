@@ -17,7 +17,7 @@ class ChatMessage extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: CircleAvatar(
-             backgroundImage: NetworkImage(
+              backgroundImage: NetworkImage(
                  data['senderPhotoUrl']
              ),
             ),

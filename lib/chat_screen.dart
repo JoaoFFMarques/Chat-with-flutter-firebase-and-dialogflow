@@ -12,12 +12,37 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'chat_message.dart';
 
 class ChatScreen extends StatefulWidget{
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
+class GameScreen extends StatelessWidget {
+
+  @override
+  Widget build(context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChatScreen()),
+            );
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
 class _ChatScreenState extends State<ChatScreen>{
 
+  bool gamestart=false;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -65,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen>{
 
     Map<String, dynamic> dataBot = {
       "uid": "bot",
-      "senderName": "O Mestre do Jogo",
+      "senderName": "Game Master",
       "senderPhotoUrl": "http://pioneiro.rbsdirect.com.br/imagesrc/15352478.jpg?w=306",
       "text": text,
       "time": Timestamp.now(),
@@ -129,7 +154,14 @@ class _ChatScreenState extends State<ChatScreen>{
 
     if(response.getMessage()!=null)_botMessage(text: response.getMessage());
 
+    if(response.getMessage()=='Lets start a game!'){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => GameScreen()),
+      );
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -161,12 +193,11 @@ class _ChatScreenState extends State<ChatScreen>{
                  },
               padding: EdgeInsets.all(10.0),
           )
-          //Container()
         ],
       ),
       body: Column(
         children: <Widget>[
-          Expanded(
+         Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance.collection('messages').orderBy('time', descending: true).snapshots(),
               builder: (context, snapshot){
@@ -178,7 +209,6 @@ class _ChatScreenState extends State<ChatScreen>{
                     );
                   default:
                     List<DocumentSnapshot> documents = snapshot.data.documents;
-
                     return ListView.builder(
                         itemCount: documents.length,
                         reverse: true,
@@ -193,6 +223,7 @@ class _ChatScreenState extends State<ChatScreen>{
               },
             ),
           ),
+
           _isLoading ? LinearProgressIndicator() : Container(),
           TextComposer(_sendMessage),
         ],
@@ -200,3 +231,4 @@ class _ChatScreenState extends State<ChatScreen>{
     );
   }
 }
+

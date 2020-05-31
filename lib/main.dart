@@ -11,6 +11,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 
 Future<FirebaseUser> _getUser() async{
@@ -60,29 +63,25 @@ class FirstRoute extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Image.asset(
-          "images/projeto_1.png",
+          "images/projeto_1.jpeg",
           fit: BoxFit.cover,
           height: double.infinity,
           width: double.infinity,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(100.0),
-              child: SignInButton(
-                Buttons.GoogleDark,
-                onPressed: () {
-                  _getUser();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ChatScreen()),
-                  );
-                },
-              ),
-            ),
-          ],
+        Container(
+          margin: EdgeInsets.only( top: 50.0),
+          alignment: Alignment.center,
+          height: 50.0,
+          child: SignInButton(
+            Buttons.GoogleDark,
+            onPressed: () {
+              _getUser();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChatScreen()),
+              );
+              },
+          ),
         )
       ]
     );
