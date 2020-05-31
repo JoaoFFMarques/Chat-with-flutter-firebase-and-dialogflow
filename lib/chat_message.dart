@@ -33,6 +33,7 @@ class ChatMessage extends StatelessWidget{
                       data['text'],
                       textAlign: mine ? TextAlign.end : TextAlign.start,
                       style: TextStyle(
+
                         fontSize: 16
                       ),
                     ),
@@ -60,4 +61,3 @@ class ChatMessage extends StatelessWidget{
     );
   }
 }
-

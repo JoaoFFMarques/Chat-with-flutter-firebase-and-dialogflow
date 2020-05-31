@@ -82,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen>{
     if(user==null){
       _scaffoldKey.currentState.showSnackBar(
           SnackBar(
-            content: Text('Não foi possível fazer o login. Tente novamente!'),
+            content: Text('Cant log in. Try again!'),
             backgroundColor: Colors.red,
           )
       );
@@ -138,7 +138,7 @@ class _ChatScreenState extends State<ChatScreen>{
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: Text(
-          _currentUser != null ? 'Olá, ${_currentUser.displayName}' : ''),
+          _currentUser != null ? 'Hello, ${_currentUser.displayName}' : ''),
         centerTitle: true,
         elevation: 0,
         actions: <Widget>[
@@ -149,7 +149,7 @@ class _ChatScreenState extends State<ChatScreen>{
               googleSignIn.signOut();
               _scaffoldKey.currentState.showSnackBar(
                   SnackBar(
-                    content: Text('Você saiu com sucesso!'),
+                    content: Text('You logged off!'),
                   )
               );
             },
