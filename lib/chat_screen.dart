@@ -21,21 +21,26 @@ class GameScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ChatScreen()),
-            );
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+    return Stack(
+        children: <Widget>[
+          Image.asset(
+            "images/game.jpg",
+            fit: BoxFit.cover,
+            width: double.infinity,
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChatScreen()),
+                );
+              },
+              child: Text('End game!'),
+            ),
+          )
+        ]
     );
   }
 }
@@ -91,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen>{
     Map<String, dynamic> dataBot = {
       "uid": "bot",
       "senderName": "Game Master",
-      "senderPhotoUrl": "http://pioneiro.rbsdirect.com.br/imagesrc/15352478.jpg?w=306",
+      "senderPhotoUrl": "https://i.ibb.co/HdJgcfd/mestre.jpg",
       "text": text,
       "time": Timestamp.now(),
     };
